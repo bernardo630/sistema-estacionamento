@@ -1,0 +1,14 @@
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\bin\Debug\net9.0\gitProject.exe
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\bin\Debug\net9.0\gitProject.deps.json
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\bin\Debug\net9.0\gitProject.runtimeconfig.json
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\bin\Debug\net9.0\gitProject.dll
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\bin\Debug\net9.0\gitProject.pdb
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.AssemblyInfoInputs.cache
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.AssemblyInfo.cs
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.csproj.CoreCompileInputs.cache
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.dll
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\refint\gitProject.dll
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.pdb
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.genruntimeconfig.cache
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\ref\gitProject.dll
