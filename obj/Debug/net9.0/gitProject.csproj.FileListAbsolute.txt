@@ -12,3 +12,4 @@ C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\refint\git
 C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.pdb
 C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.genruntimeconfig.cache
 C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\ref\gitProject.dll
+C:\Users\Benny Aragão\Desktop\gitProject\gitProject\obj\Debug\net9.0\gitProject.sourcelink.json

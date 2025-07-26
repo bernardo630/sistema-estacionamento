@@ -1,7 +1,7 @@
-// Arquivo: Models/Estacionamento.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 namespace DesafioFundamentos.Models
 {
@@ -98,10 +98,23 @@ namespace DesafioFundamentos.Models
             veiculos.Add(v);
             faturamentoTotal += valor;
 
-            Console.WriteLine($"\n✅ Veículo cadastrado com sucesso!");
-            Console.WriteLine($"📍 Vaga: {numeroVaga:D3}");
-            Console.WriteLine($"🔐 Senha: {senha}");
-            Console.WriteLine($"💰 Valor a pagar: {valor:F2} Kz");
+            Console.WriteLine("\n✅ Veículo cadastrado com sucesso!\n");
+
+            Console.WriteLine("=========================================");
+            Console.WriteLine("         📄 RECIBO DE ESTACIONAMENTO");
+            Console.WriteLine("=========================================");
+            Console.WriteLine($"Placa do Veículo . . : {v.Placa}");
+            Console.WriteLine($"Proprietário . . . . : {v.Proprietario}");
+            Console.WriteLine($"Número da Vaga . . . : {v.Vaga:D3}");
+            Console.WriteLine($"Tipo de Permanência  : {TipoDescricao(v.Tipo)}");
+            Console.WriteLine($"Valor Pago . . . . . : {v.ValorPagoAntecipado:F2} Kz");
+            Console.WriteLine($"Data/Hora de Entrada : {v.Entrada:dd/MM/yyyy HH:mm}");
+            Console.WriteLine($"Senha de Acesso  . . : {v.Senha}");
+            Console.WriteLine("=========================================");
+            Console.WriteLine("⚠️  Guarde este recibo para futuras consultas.");
+
+            SalvarVeiculos();
+            SalvarFaturamento();
         }
 
         public void RemoverVeiculo()
@@ -121,8 +134,53 @@ namespace DesafioFundamentos.Models
                 return;
             }
 
+            Console.WriteLine("\n🔄 Calculando tempo real de permanência...");
+
+            DateTime agora = DateTime.Now;
+            TimeSpan tempoTotal = agora - veiculo.Entrada;
+
+            decimal valorExcedente = 0;
+
+            if (veiculo.Tipo == 1) // Por Hora
+            {
+                double horasUsadas = tempoTotal.TotalHours;
+                double horasPagas = (double)(veiculo.ValorPagoAntecipado / precoPorHora);
+
+                if (horasUsadas > horasPagas)
+                {
+                    double excedente = Math.Ceiling(horasUsadas - horasPagas);
+                    valorExcedente = precoPorHora * (decimal)excedente;
+                }
+            }
+            else if (veiculo.Tipo == 2) // Por Dia
+            {
+                double diasUsados = tempoTotal.TotalDays;
+                double diasPagos = (double)(veiculo.ValorPagoAntecipado / precoPorDia);
+
+                if (diasUsados > diasPagos)
+                {
+                    double excedente = Math.Ceiling(diasUsados - diasPagos);
+                    valorExcedente = precoPorDia * (decimal)excedente;
+                }
+            }
+
             veiculos.Remove(veiculo);
-            Console.WriteLine($"✅ Veículo removido com sucesso. Nenhum valor adicional a pagar (valor já foi pago no início).");
+
+            Console.WriteLine("\n✅ Veículo removido com sucesso.");
+            Console.WriteLine($"⏱️ Tempo de permanência: {tempoTotal.Hours}h {tempoTotal.Minutes}min");
+
+            if (valorExcedente > 0)
+            {
+                Console.WriteLine($"⚠️ Tempo excedido! Valor adicional a pagar: {valorExcedente:F2} Kz");
+                faturamentoTotal += valorExcedente;
+            }
+            else
+            {
+                Console.WriteLine("💰 Nenhum valor adicional a pagar (dentro do tempo pago).");
+            }
+
+            SalvarVeiculos();
+            SalvarFaturamento();
         }
 
         public void ListarVeiculos()
@@ -185,6 +243,27 @@ namespace DesafioFundamentos.Models
                 3 => "Por Mês",
                 _ => "Desconhecido"
             };
+        }
+
+        private void SalvarVeiculos()
+        {
+            string caminhoVeiculos = "veiculos.txt";
+            using (StreamWriter writer = new StreamWriter(caminhoVeiculos, false))
+            {
+                foreach (var v in veiculos)
+                {
+                    writer.WriteLine($"{v.Placa},{v.Proprietario},{v.Entrada},{v.Tipo},{v.Senha},{v.Vaga},{v.ValorPagoAntecipado}");
+                }
+            }
+        }
+
+        private void SalvarFaturamento()
+        {
+            string caminhoFaturamento = "faturamento.txt";
+            using (StreamWriter writer = new StreamWriter(caminhoFaturamento, false))
+            {
+                writer.WriteLine($"Faturamento Total: {faturamentoTotal:F2} Kz");
+            }
         }
     }
 
